@@ -7,12 +7,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      approve:
-        description: 'Approve Terraform changes'
-        required: true
-        default: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,13 +22,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
-      # Runs a set of commands using the runners shell
-  deploy:
-     runs-on: ubuntu-latest
-     steps:
-      - name: Run a multi-line script
-        if: ${{ github.event.inputs.approve == 'true' }}
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+        run: echo apply
+      # Runs a set of commands using the runners shel
