@@ -1,7 +1,7 @@
 name: Terraform Apply
 
 on:
-  workflow_run:
+  workflow_dispatch:
     inputs:
       approve:
         description: 'Approve Terraform changes'
