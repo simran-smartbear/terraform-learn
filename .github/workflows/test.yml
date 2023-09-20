@@ -4,14 +4,15 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+      - main
   workflow_dispatch:
+    inputs:
+      approve:
+        description: 'Approve Terraform changes'
+        required: true
+        default: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,13 +29,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-        
-      - name: Manual Approval
-        id: approval
-        run: echo "::set-output name=approved::$(read -p 'Approve and press enter to proceed: ' && echo true || echo false)''
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        if: steps.approval.outputs.approved == 'true'
+        if: ${{ github.event.inputs.approve == 'true' }}
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
