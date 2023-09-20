@@ -5,7 +5,11 @@ on:
     workflows: ["CI"]
     types:
       - completed
-
+    inputs:
+      approve:
+        description: 'Approve Terraform changes'
+        required: true
+        default: false
 jobs:
   terraform:
     runs-on: ubuntu-latest
